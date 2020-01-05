@@ -4,6 +4,7 @@ let snowblock = document.querySelector('.snowblock__wrap');            // выб
 let peremX = 0;                                                        // переменная для снежинки по оси X
 let peremY = 0;                                                        // переменная для снежинки по оси Y
 let densitySnow = Math.floor((wdth + hght) / 100);                     // расчитываем плотность снежинок относительно размеров окна
+let biasarr = [-1, -1, -1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
 function snows() {                                                     // ф-ия снежинка
@@ -20,28 +21,25 @@ function snows() {                                                     // ф-и�
   img.style.position = 'relative';                                     // назначаем позиционирование
   img.style.left = startX + 'px';                                      // присваиваем сгенерированное значение позиции относительно левого уровня документа
   img.style.top = startY + 'px';                                       // присваиваем сгенерированное значение позоции относительно верхнего уровня документа  
-
-  console.log(`Page Y - ${hght}`);
-  console.log(`Page X - ${wdth}`);
+  
   peremY = parseInt(img.style.top);
   peremX = parseInt(img.style.left);
+  
+  console.log(`Page Y - ${hght}`);
+  console.log(`Page X - ${wdth}`);
   console.log(`snowY - ${peremY}`);
   console.log(`snowX - ${peremX}`);
-  
+    
   setInterval(() => {
-    if(peremY <= hght) {
-      
-      peremY++;
+    if(peremY <= hght) {      
+      let bias = Math.floor(Math.random() * biasarr.length);
+      peremY++;      
+      peremX += biasarr[bias];
       //console.log(peremY);
       img.style.top = peremY + 'px';
+      img.style.left = peremX + 'px';
     }
-  }, 25);
-
-  // console.log(`document width - ${wdth}`);
-  // console.log(`document height - ${hght}`);
-  // console.log(`startX - ${startX}`);
-  // console.log(`startY - ${startY}`);
-  // console.log(`Density snow - ${densitySnow}`);
+  }, 20);
 
 }
 
