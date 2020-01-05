@@ -7,6 +7,7 @@ let densitySnow = Math.floor((wdth + hght) / 100);                     // рас
 let biasarr = [-1, -1, -1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
+
 function snows() {                                                     // ф-ия снежинка
   let img = document.createElement('img');                             // создаём img 
   img.src = '../pict/snejinka.png';                                    // в src определяем картинку снежинки
@@ -22,24 +23,26 @@ function snows() {                                                     // ф-и�
   img.style.left = startX + 'px';                                      // присваиваем сгенерированное значение позиции относительно левого уровня документа
   img.style.top = startY + 'px';                                       // присваиваем сгенерированное значение позоции относительно верхнего уровня документа  
   
-  peremY = parseInt(img.style.top);
-  peremX = parseInt(img.style.left);
+  peremY = parseInt(img.style.top);                                    // в переменную по оси Y из значения типа 10рх выделяем число и присваиваем
+  peremX = parseInt(img.style.left);                                   // в переменную по оси Х из значения типа 10рх выделяем число и присваиваем
   
   console.log(`Page Y - ${hght}`);
   console.log(`Page X - ${wdth}`);
   console.log(`snowY - ${peremY}`);
   console.log(`snowX - ${peremX}`);
     
-  setInterval(() => {
+  setInterval(() => {                                                  // 
     if(peremY <= hght) {      
       let bias = Math.floor(Math.random() * biasarr.length);
       peremY++;      
-      peremX += biasarr[bias];
-      //console.log(peremY);
+      peremX += biasarr[bias];      
       img.style.top = peremY + 'px';
       img.style.left = peremX + 'px';
+    } else if(peremY > hght) {
+      peremY = Math.floor(Math.random() * hght);
+      peremX = Math.floor(Math.random() * wdth);
     }
-  }, 20);
+  }, 15);
 
 }
 
